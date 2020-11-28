@@ -185,8 +185,15 @@ class CartBox extends \System\Classes\BaseComponent
         try {
             $rowId = (string)post('rowId');
             $quantity = (int)post('quantity');
-
-            $this->cartManager->updateCartItemQty($rowId, $quantity);
+            
+            if ($quantity < 1)
+            {
+                $this->cartManager->removeCartItem($rowId);
+            }
+            else 
+            {
+                $this->cartManager->updateCartItemQty($rowId, $quantity);
+            }
 
             $this->controller->pageCycle();
 
