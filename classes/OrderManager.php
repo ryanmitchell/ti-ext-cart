@@ -161,7 +161,7 @@ class OrderManager
      */
     public function saveOrder($order, array $data)
     {
-        Event::fire('igniter.checkout.beforeSaveOrder', [$order, $data]);
+        Event::fire('igniter.checkout.beforeSaveOrder', [$order, &$data]);
 
         if ($this->customer)
             $data['email'] = $this->customer->email;
